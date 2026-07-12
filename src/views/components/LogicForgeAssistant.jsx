@@ -5,7 +5,7 @@ import { assistantSuggestions, getAssistantReply } from '../../services/assistan
 const initialState = {
   open: false,
   typing: false,
-  messages: [{ id: 1, role: 'assistant', text: 'Hi — I’m the LogicForge website assistant. What would you like to know?' }],
+  messages: [{ id: 1, role: 'bot', text: 'Hi — I’m the LogicForge website assistant. What would you like to know?' }],
 }
 
 function reducer(state, action) {
@@ -14,6 +14,7 @@ function reducer(state, action) {
     case 'close': return { ...state, open: false }
     case 'ask': return { ...state, typing: true, messages: [...state.messages, action.message] }
     case 'reply': return { ...state, typing: false, messages: [...state.messages, action.message] }
+    case 'error': return { ...state, typing: false, messages: [...state.messages, action.message] }
     default: return state
   }
 }
@@ -41,8 +42,16 @@ function LogicForgeAssistant() {
     const question = text.trim()
     if (!question || state.typing) return
     dispatch({ type: 'ask', message: { id: crypto.randomUUID(), role: 'user', text: question } })
-    const reply = await getAssistantReply(question)
-    dispatch({ type: 'reply', message: { id: crypto.randomUUID(), role: 'assistant', text: reply } })
+    const apiMessages = [...state.messages, { role: 'user', text: question }].map((message) => ({
+      role: message.role === 'bot' ? 'assistant' : 'user',
+      content: message.text,
+    }))
+    try {
+      const reply = await getAssistantReply(apiMessages)
+      dispatch({ type: 'reply', message: { id: crypto.randomUUID(), role: 'bot', text: reply } })
+    } catch (error) {
+      dispatch({ type: 'error', message: { id: crypto.randomUUID(), role: 'error', text: error.message } })
+    }
   }
 
   const submit = (event) => {

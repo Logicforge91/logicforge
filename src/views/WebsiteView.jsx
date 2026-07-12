@@ -34,6 +34,9 @@ function WebsiteView() {
 
       <section className="hero" id="top">
         <AINetwork />
+        <figure className="hero-media" aria-label="Concept visualization of an AI-enabled software platform">
+          <img src="/images/logicforge-ai-platform.png" alt="Abstract AI data platform with connected information flowing through glass interface panels" fetchPriority="high" />
+        </figure>
         <div className="hero-grid" aria-hidden="true" />
         <div className="orbit orbit-one" aria-hidden="true" />
         <div className="orbit orbit-two" aria-hidden="true" />
