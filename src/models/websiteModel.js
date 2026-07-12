@@ -1,4 +1,9 @@
 export const websiteModel = {
+  company: {
+    name: 'LogicForge',
+    tagline: 'Ideas, engineered.',
+    description: 'A product engineering studio helping growing businesses design, build, and modernise digital products.',
+  },
   services: [
     {
       number: '01',
@@ -37,7 +42,10 @@ export const websiteModel = {
     { number: '04', title: 'Scale', text: 'We launch, learn, and keep improving.' },
   ],
   contact: {
-    email: 'hello@logicforge.dev',
-    location: 'India · Working worldwide',
+    email: 'hello@logicforge.example',
+    phone: '+91 90000 00000',
+    location: 'Bengaluru, Karnataka · Working worldwide',
+    address: '42 Innovation Road, Indiranagar, Bengaluru 560038',
+    availability: 'Available for projects starting August 2026',
   },
 }

@@ -6,14 +6,14 @@ const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap }
 
 function WebsiteView() {
   const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry } = useWebsiteController()
-  const { services, engagements, capabilities, process, contact } = websiteModel
+  const { company, services, engagements, capabilities, process, contact } = websiteModel
 
   return (
     <main>
       <header className="nav-wrap">
         <a className="brand" href="#top" aria-label="LogicForge home">
           <span className="brand-mark"><Braces size={22} strokeWidth={2.8} /></span>
-          <span>LogicForge</span>
+          <span>{company.name}</span>
         </a>
         <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
           <a href="#services" onClick={closeMenu}>Services</a>
@@ -31,7 +31,7 @@ function WebsiteView() {
         <div className="orbit orbit-one" aria-hidden="true" />
         <div className="orbit orbit-two" aria-hidden="true" />
         <div className="hero-content">
-          <div className="eyebrow"><span /> Available for new projects · India / Worldwide</div>
+          <div className="eyebrow"><span /> {contact.availability}</div>
           <h1>Ideas,<br /><em>engineered.</em></h1>
           <div className="hero-bottom">
             <p>We build intelligent digital products for ambitious companies who refuse to stand still.</p>
@@ -54,7 +54,7 @@ function WebsiteView() {
           <h2>It should move your<br />business <em>forward.</em></h2>
         </div>
         <div className="intro-side reveal">
-          <p>LogicForge partners with founders and teams to plan, design, and engineer useful software. One focused team takes your product from a clear business problem to a reliable release.</p>
+          <p>{company.description} One focused team takes your product from a clear business problem to a reliable release.</p>
           <a className="text-link" href="#contact">How we work <MoveRight size={18} /></a>
         </div>
       </section>
@@ -140,7 +140,7 @@ function WebsiteView() {
             <p>Have an idea worth building?</p>
             <h2>Let's make it<br /><em>real.</em></h2>
             <a className="contact-email" href={`mailto:${contact.email}`}><Mail size={17} /> {contact.email}</a>
-            <small>{contact.location}</small>
+            <small>{contact.location}<br />{contact.address}<br />{contact.phone}</small>
           </div>
           <form className="contact-form reveal" onSubmit={(event) => submitEnquiry(event, contact.email)} noValidate>
             <div className="form-row">
@@ -163,10 +163,10 @@ function WebsiteView() {
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>LogicForge</a>
+        <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>{company.name}</a>
         <p>Strategy · Design · Engineering</p>
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        <small>© {new Date().getFullYear()} LogicForge. All rights reserved.</small>
+        <small>© {new Date().getFullYear()} {company.name}. All rights reserved.</small>
       </footer>
     </main>
   )
