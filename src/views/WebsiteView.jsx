@@ -1,31 +1,12 @@
-import { useEffect, useState } from 'react'
 import { ArrowDown, ArrowUpRight, Braces, Check, Code2, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
+import { useWebsiteController } from '../controllers/useWebsiteController.js'
+import { websiteModel } from '../models/websiteModel.js'
 
-const services = [
-  { number: '01', title: 'Product engineering', text: 'From first sketch to production scale, we design and build digital products people want to use.', icon: Code2 },
-  { number: '02', title: 'AI & automation', text: 'We turn your workflows into intelligent systems that move faster, learn, and create leverage.', icon: Sparkles },
-  { number: '03', title: 'Digital transformation', text: 'Modern architecture, connected data, and focused strategy for companies ready for what’s next.', icon: Zap },
-]
+const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap }
 
-const projects = [
-  { name: 'Nexora', type: 'AI Operations Platform', result: '3.4× faster decisions', color: 'violet', mark: 'N' },
-  { name: 'Arcway', type: 'Financial Infrastructure', result: '62% less manual work', color: 'lime', mark: 'A' },
-  { name: 'Morrow', type: 'Climate Intelligence', result: 'From idea to Series A', color: 'orange', mark: 'M' },
-]
-
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const reveal = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')),
-      { threshold: 0.12 },
-    )
-    document.querySelectorAll('.reveal').forEach((el) => reveal.observe(el))
-    return () => reveal.disconnect()
-  }, [])
-
-  const closeMenu = () => setMenuOpen(false)
+function WebsiteView() {
+  const { menuOpen, toggleMenu, closeMenu } = useWebsiteController()
+  const { services, projects, metrics, process, socialLinks } = websiteModel
 
   return (
     <main>
@@ -40,7 +21,7 @@ function App() {
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <ArrowUpRight size={16} /></a>
         </nav>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
+        <button className="menu-button" onClick={toggleMenu} aria-label="Toggle navigation" aria-expanded={menuOpen}>
           {menuOpen ? <X /> : <Menu />}
         </button>
       </header>
@@ -84,7 +65,9 @@ function App() {
           <h2>Built for the<br /><em>next move.</em></h2>
         </div>
         <div className="service-list">
-          {services.map(({ number, title, text, icon: Icon }) => (
+          {services.map(({ number, title, text, icon }) => {
+            const Icon = serviceIcons[icon]
+            return (
             <article className="service reveal" key={title}>
               <span className="service-number">{number}</span>
               <div className="service-icon"><Icon /></div>
@@ -92,7 +75,8 @@ function App() {
               <p>{text}</p>
               <a href="#contact" aria-label={`Learn about ${title}`}><ArrowUpRight /></a>
             </article>
-          ))}
+            )
+          })}
         </div>
       </section>
 
@@ -122,10 +106,11 @@ function App() {
       </section>
 
       <section className="numbers">
-        <div className="number reveal"><strong>40<span>+</span></strong><p>Products shipped</p></div>
-        <div className="number reveal"><strong>12</strong><p>Industries transformed</p></div>
-        <div className="number reveal"><strong>8<span>yr</span></strong><p>Building what's next</p></div>
-        <div className="number reveal"><strong>92<span>%</span></strong><p>Clients return</p></div>
+        {metrics.map(({ value, suffix, label }) => (
+          <div className="number reveal" key={label}>
+            <strong>{value}{suffix && <span>{suffix}</span>}</strong><p>{label}</p>
+          </div>
+        ))}
       </section>
 
       <section className="process section-pad">
@@ -135,10 +120,9 @@ function App() {
           <p>Small senior teams. Direct communication. No black boxes.</p>
         </div>
         <ol className="steps reveal">
-          <li><span>01</span><div><h3>Discover</h3><p>We get to the heart of the problem.</p></div></li>
-          <li><span>02</span><div><h3>Define</h3><p>We align the product, people, and path.</p></div></li>
-          <li><span>03</span><div><h3>Build</h3><p>We design and engineer in tight loops.</p></div></li>
-          <li><span>04</span><div><h3>Scale</h3><p>We launch, learn, and keep improving.</p></div></li>
+          {process.map(({ number, title, text }) => (
+            <li key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></li>
+          ))}
         </ol>
       </section>
 
@@ -161,11 +145,11 @@ function App() {
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>LogicForge</a>
         <p>Strategy · Design · Engineering</p>
-        <div><a href="#top">LinkedIn</a><a href="#top">Instagram</a><a href="#top">Dribbble</a></div>
+        <div>{socialLinks.map((social) => <a href="#top" key={social}>{social}</a>)}</div>
         <small>© {new Date().getFullYear()} LogicForge. All systems go.</small>
       </footer>
     </main>
   )
 }
 
-export default App
+export default WebsiteView
