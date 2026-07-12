@@ -6,11 +6,7 @@ export function useWebsiteController() {
   const [activeSection, setActiveSection] = useState('top')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [openFaq, setOpenFaq] = useState(0)
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('logicforge-theme')
-    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  })
+  const theme = 'dark'
 
   const toggleMenu = useCallback(() => setMenuOpen((open) => !open), [])
   const closeMenu = useCallback(() => setMenuOpen(false), [])
@@ -18,7 +14,6 @@ export function useWebsiteController() {
     setOpenFaq((current) => current === index ? -1 : index)
   }, [])
   const scrollToTop = useCallback(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [])
-  const toggleTheme = useCallback(() => setTheme((current) => current === 'dark' ? 'light' : 'dark'), [])
 
   const submitEnquiry = useCallback((event, recipient) => {
     event.preventDefault()
@@ -62,7 +57,6 @@ export function useWebsiteController() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     document.documentElement.style.colorScheme = theme
-    localStorage.setItem('logicforge-theme', theme)
   }, [theme])
 
   useEffect(() => {
@@ -98,5 +92,5 @@ export function useWebsiteController() {
     }
   }, [])
 
-  return { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop, theme, toggleTheme }
+  return { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop }
 }

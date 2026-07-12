@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Headphones, Mail, Menu, Moon, MoveRight, Sparkles, Sun, X, Zap } from 'lucide-react'
+import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Headphones, Mail, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
 import { useWebsiteController } from '../controllers/useWebsiteController.js'
 import { websiteModel } from '../models/websiteModel.js'
 import AINetwork from './components/AINetwork.jsx'
@@ -7,7 +7,7 @@ import LogicForgeAssistant from './components/LogicForgeAssistant.jsx'
 const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap, support: Headphones }
 
 function WebsiteView() {
-  const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop, theme, toggleTheme } = useWebsiteController()
+  const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop } = useWebsiteController()
   const { company, services, engagements, capabilities, technologyStack, clientBenefits, process, faqs, contact } = websiteModel
 
   return (
@@ -25,9 +25,6 @@ function WebsiteView() {
           <a href="#about" className={activeSection === 'about' ? 'active' : ''} aria-current={activeSection === 'about' ? 'location' : undefined} onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Hire LogicForge <ArrowUpRight size={16} /></a>
         </nav>
-        <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
         <button className="menu-button" onClick={toggleMenu} aria-label="Toggle navigation" aria-expanded={menuOpen}>
           {menuOpen ? <X /> : <Menu />}
         </button>
