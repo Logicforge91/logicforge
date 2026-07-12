@@ -30,10 +30,40 @@ export const websiteModel = {
       icon: 'support',
     },
   ],
+  aiSolutions: [
+    {
+      number: '01',
+      title: 'AI API integration',
+      text: 'Connect business applications to trusted AI model providers through secure Laravel or Spring Boot services.',
+      icon: 'brain',
+      tag: 'Models + APIs',
+    },
+    {
+      number: '02',
+      title: 'Knowledge search',
+      text: 'Build grounded search and question-answering experiences over company documents, records, and internal knowledge.',
+      icon: 'database',
+      tag: 'RAG systems',
+    },
+    {
+      number: '03',
+      title: 'Workflow automation',
+      text: 'Add AI-assisted classification, extraction, routing, and review steps to existing business processes.',
+      icon: 'workflow',
+      tag: 'Automation',
+    },
+    {
+      number: '04',
+      title: 'Secure AI backends',
+      text: 'Protect AI features with authentication, authorization, rate limits, audit trails, caching, and human review.',
+      icon: 'shield',
+      tag: 'Production ready',
+    },
+  ],
   engagements: [
-    { name: 'Build a website', type: 'For businesses and independent brands', detail: 'Design, development, SEO basics, deployment', image: '/images/engagement-launch.png', width: 1774, height: 887, alt: 'Product team reviewing a newly designed business website in a bright studio' },
-    { name: 'Develop a backend', type: 'For apps and digital products', detail: 'REST API, database, authentication, integrations', image: '/images/engagement-modernise.png', width: 1672, height: 941, alt: 'Backend engineer reviewing a modern API and system architecture across multiple screens' },
-    { name: 'Improve & support', type: 'For existing websites and applications', detail: 'Bug fixes, new features, speed, maintenance', image: '/images/engagement-automate.png', width: 1662, height: 946, alt: 'Technical professional monitoring and supporting connected business systems' },
+    { name: 'Build a website', type: 'For businesses and independent brands', detail: 'Design, development, SEO basics, deployment', image: '/images/engagement-launch.jpg', width: 1774, height: 887, alt: 'Product team reviewing a newly designed business website in a bright studio' },
+    { name: 'Develop a backend', type: 'For apps and digital products', detail: 'REST API, database, authentication, integrations', image: '/images/engagement-modernise.jpg', width: 1672, height: 941, alt: 'Backend engineer reviewing a modern API and system architecture across multiple screens' },
+    { name: 'Improve & support', type: 'For existing websites and applications', detail: 'Bug fixes, new features, speed, maintenance', image: '/images/engagement-automate.jpg', width: 1662, height: 946, alt: 'Technical professional monitoring and supporting connected business systems' },
   ],
   capabilities: [
     { value: 'PHP 8', label: 'Laravel, Lumen, Core PHP, and MVC' },
