@@ -1,8 +1,10 @@
+import { lazy, Suspense } from 'react'
 import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Headphones, Mail, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
 import { useWebsiteController } from '../controllers/useWebsiteController.js'
 import { websiteModel } from '../models/websiteModel.js'
 import AINetwork from './components/AINetwork.jsx'
-import LogicForgeAssistant from './components/LogicForgeAssistant.jsx'
+
+const LogicForgeAssistant = lazy(() => import('./components/LogicForgeAssistant.jsx'))
 
 const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap, support: Headphones }
 
@@ -33,7 +35,7 @@ function WebsiteView() {
       <section className="hero" id="top" aria-labelledby="main-content">
         <AINetwork />
         <figure className="hero-media" aria-label="Concept visualization of an AI-enabled software platform">
-          <img src="/images/logicforge-ai-platform.png" alt="Abstract AI data platform with connected information flowing through glass interface panels" fetchPriority="high" />
+          <img src="/images/logicforge-ai-platform.png" width="1774" height="887" alt="Abstract AI data platform with connected information flowing through glass interface panels" fetchPriority="high" />
         </figure>
         <div className="hero-grid" aria-hidden="true" />
         <div className="orbit orbit-one" aria-hidden="true" />
@@ -114,7 +116,7 @@ function WebsiteView() {
           {engagements.map((engagement, index) => (
             <article className={`project reveal project-${index + 1}`} key={engagement.name}>
               <div className="project-visual">
-                <img src={engagement.image} alt={engagement.alt} loading="lazy" decoding="async" />
+                <img src={engagement.image} width={engagement.width} height={engagement.height} alt={engagement.alt} loading="lazy" decoding="async" />
                 <span className="project-shade" aria-hidden="true" />
                 <span className="project-index">0{index + 1} / 03</span>
                 <ArrowUpRight className="project-arrow" />
@@ -230,7 +232,7 @@ function WebsiteView() {
         <small>© {new Date().getFullYear()} {company.name}. All rights reserved.</small>
       </footer>
       <button className={scrollProgress > 18 ? 'back-to-top visible' : 'back-to-top'} type="button" onClick={scrollToTop} aria-label="Back to top"><ArrowUp size={18} /></button>
-      <LogicForgeAssistant />
+      <Suspense fallback={null}><LogicForgeAssistant /></Suspense>
     </main>
   )
 }

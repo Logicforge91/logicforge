@@ -4,6 +4,17 @@ import OpenAI from 'openai'
 const app = express()
 const port = Number(process.env.PORT || 8787)
 const requests = new Map()
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null
+
+const cleanupTimer = setInterval(() => {
+  const cutoff = Date.now() - 60_000
+  for (const [key, timestamps] of requests) {
+    const recent = timestamps.filter((time) => time > cutoff)
+    if (recent.length) requests.set(key, recent)
+    else requests.delete(key)
+  }
+}, 60_000)
+cleanupTimer.unref()
 
 app.disable('x-powered-by')
 app.use(express.json({ limit: '24kb' }))
@@ -19,7 +30,7 @@ app.use('/api', (request, response, next) => {
 })
 
 app.post('/api/assistant', async (request, response) => {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!openai) {
     return response.status(503).json({ error: 'The AI assistant is not configured yet.' })
   }
 
@@ -34,7 +45,6 @@ app.post('/api/assistant', async (request, response) => {
   }
 
   try {
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     const result = await openai.responses.create({
       model: process.env.OPENAI_MODEL || 'gpt-5.6-luna',
       instructions: `You are the website assistant for LogicForge, a product engineering studio. Answer concisely and professionally using only this company context:
