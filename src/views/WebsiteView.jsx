@@ -1,10 +1,7 @@
-import { lazy, Suspense } from 'react'
 import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Headphones, Mail, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
 import { useWebsiteController } from '../controllers/useWebsiteController.js'
 import { websiteModel } from '../models/websiteModel.js'
 import AINetwork from './components/AINetwork.jsx'
-
-const LogicForgeAssistant = lazy(() => import('./components/LogicForgeAssistant.jsx'))
 
 const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap, support: Headphones }
 
@@ -232,7 +229,6 @@ function WebsiteView() {
         <small>© {new Date().getFullYear()} {company.name}. All rights reserved.</small>
       </footer>
       <button className={scrollProgress > 18 ? 'back-to-top visible' : 'back-to-top'} type="button" onClick={scrollToTop} aria-label="Back to top"><ArrowUp size={18} /></button>
-      <Suspense fallback={null}><LogicForgeAssistant /></Suspense>
     </main>
   )
 }
