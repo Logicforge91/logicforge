@@ -6,7 +6,7 @@ export function useWebsiteController() {
   const [activeSection, setActiveSection] = useState('top')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [openFaq, setOpenFaq] = useState(0)
-  const theme = 'light'
+  const theme = 'dark'
 
   const toggleMenu = useCallback(() => setMenuOpen((open) => !open), [])
   const closeMenu = useCallback(() => setMenuOpen(false), [])
