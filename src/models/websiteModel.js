@@ -15,20 +15,20 @@ export const websiteModel = {
     {
       number: '03',
       title: 'Digital transformation',
-      text: 'Modern architecture, connected data, and focused strategy for companies ready for what’s next.',
+      text: 'Modern architecture, connected data, and focused strategy for companies ready for what is next.',
       icon: 'zap',
     },
   ],
-  projects: [
-    { name: 'Nexora', type: 'AI Operations Platform', result: '3.4× faster decisions', color: 'violet', mark: 'N' },
-    { name: 'Arcway', type: 'Financial Infrastructure', result: '62% less manual work', color: 'lime', mark: 'A' },
-    { name: 'Morrow', type: 'Climate Intelligence', result: 'From idea to Series A', color: 'orange', mark: 'M' },
+  engagements: [
+    { name: 'Launch', type: 'For founders and new ventures', detail: 'MVP strategy, UX/UI, engineering, launch', color: 'violet', mark: 'L' },
+    { name: 'Modernise', type: 'For established product teams', detail: 'Architecture, redesign, cloud, performance', color: 'lime', mark: 'M' },
+    { name: 'Automate', type: 'For operations-heavy businesses', detail: 'AI workflows, integrations, internal tools', color: 'orange', mark: 'A' },
   ],
-  metrics: [
-    { value: '40', suffix: '+', label: 'Products shipped' },
-    { value: '12', suffix: '', label: 'Industries transformed' },
-    { value: '8', suffix: 'yr', label: "Building what's next" },
-    { value: '92', suffix: '%', label: 'Clients return' },
+  capabilities: [
+    { value: 'Web', label: 'React and modern web platforms' },
+    { value: 'API', label: 'Secure services and integrations' },
+    { value: 'Cloud', label: 'Scalable deployment and operations' },
+    { value: 'AI', label: 'Practical automation and intelligence' },
   ],
   process: [
     { number: '01', title: 'Discover', text: 'We get to the heart of the problem.' },
@@ -36,5 +36,8 @@ export const websiteModel = {
     { number: '03', title: 'Build', text: 'We design and engineer in tight loops.' },
     { number: '04', title: 'Scale', text: 'We launch, learn, and keep improving.' },
   ],
-  socialLinks: ['LinkedIn', 'Instagram', 'Dribbble'],
+  contact: {
+    email: 'hello@logicforge.dev',
+    location: 'India · Working worldwide',
+  },
 }

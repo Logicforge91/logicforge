@@ -1,12 +1,12 @@
-import { ArrowDown, ArrowUpRight, Braces, Check, Code2, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Braces, Check, Code2, Mail, Menu, MoveRight, Sparkles, X, Zap } from 'lucide-react'
 import { useWebsiteController } from '../controllers/useWebsiteController.js'
 import { websiteModel } from '../models/websiteModel.js'
 
 const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap }
 
 function WebsiteView() {
-  const { menuOpen, toggleMenu, closeMenu } = useWebsiteController()
-  const { services, projects, metrics, process, socialLinks } = websiteModel
+  const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry } = useWebsiteController()
+  const { services, engagements, capabilities, process, contact } = websiteModel
 
   return (
     <main>
@@ -17,7 +17,7 @@ function WebsiteView() {
         </a>
         <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
           <a href="#services" onClick={closeMenu}>Services</a>
-          <a href="#work" onClick={closeMenu}>Work</a>
+          <a href="#engagements" onClick={closeMenu}>How we help</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <ArrowUpRight size={16} /></a>
         </nav>
@@ -31,7 +31,7 @@ function WebsiteView() {
         <div className="orbit orbit-one" aria-hidden="true" />
         <div className="orbit orbit-two" aria-hidden="true" />
         <div className="hero-content">
-          <div className="eyebrow"><span /> Independent technology studio · India / Worldwide</div>
+          <div className="eyebrow"><span /> Available for new projects · India / Worldwide</div>
           <h1>Ideas,<br /><em>engineered.</em></h1>
           <div className="hero-bottom">
             <p>We build intelligent digital products for ambitious companies who refuse to stand still.</p>
@@ -54,7 +54,7 @@ function WebsiteView() {
           <h2>It should move your<br />business <em>forward.</em></h2>
         </div>
         <div className="intro-side reveal">
-          <p>LogicForge is a team of strategists, designers, and engineers. We solve complex problems with clarity, craft, and code—turning bold ideas into products built to last.</p>
+          <p>LogicForge partners with founders and teams to plan, design, and engineer useful software. One focused team takes your product from a clear business problem to a reliable release.</p>
           <a className="text-link" href="#contact">How we work <MoveRight size={18} /></a>
         </div>
       </section>
@@ -80,25 +80,25 @@ function WebsiteView() {
         </div>
       </section>
 
-      <section className="work section-pad" id="work">
+      <section className="work section-pad" id="engagements">
         <div className="work-heading reveal">
           <div>
-            <div className="section-kicker"><span>03</span> Selected work</div>
-            <h2>Proof, not<br /><em>promises.</em></h2>
+            <div className="section-kicker"><span>03</span> Ways to work together</div>
+            <h2>Start where<br /><em>you are.</em></h2>
           </div>
-          <p>A few of the ideas we’ve helped shape, launch, and scale into meaningful businesses.</p>
+          <p>Choose a focused engagement or bring us a difficult product problem. We shape the right scope together before any build begins.</p>
         </div>
         <div className="project-grid">
-          {projects.map((project, index) => (
-            <article className={`project reveal project-${index + 1}`} key={project.name}>
-              <div className={`project-visual ${project.color}`}>
-                <span className="project-mark">{project.mark}</span>
+          {engagements.map((engagement, index) => (
+            <article className={`project reveal project-${index + 1}`} key={engagement.name}>
+              <div className={`project-visual ${engagement.color}`}>
+                <span className="project-mark">{engagement.mark}</span>
                 <span className="project-index">0{index + 1} / 03</span>
                 <ArrowUpRight className="project-arrow" />
               </div>
               <div className="project-meta">
-                <div><h3>{project.name}</h3><p>{project.type}</p></div>
-                <span>{project.result}</span>
+                <div><h3>{engagement.name}</h3><p>{engagement.type}</p></div>
+                <span>{engagement.detail}</span>
               </div>
             </article>
           ))}
@@ -106,9 +106,9 @@ function WebsiteView() {
       </section>
 
       <section className="numbers">
-        {metrics.map(({ value, suffix, label }) => (
+        {capabilities.map(({ value, label }) => (
           <div className="number reveal" key={label}>
-            <strong>{value}{suffix && <span>{suffix}</span>}</strong><p>{label}</p>
+            <strong>{value}</strong><p>{label}</p>
           </div>
         ))}
       </section>
@@ -126,27 +126,47 @@ function WebsiteView() {
         </ol>
       </section>
 
-      <section className="quote section-pad">
-        <div className="quote-mark">“</div>
-        <blockquote className="reveal">LogicForge didn't feel like a vendor. They challenged our thinking, understood the business, and built something better than we imagined.</blockquote>
-        <div className="quote-person reveal"><span>RK</span><p><strong>Rohan Khanna</strong><br />Founder, Nexora</p></div>
+      <section className="quote section-pad" aria-labelledby="promise-title">
+        <div className="quote-mark"><Braces /></div>
+        <blockquote className="reveal" id="promise-title">Senior attention, transparent progress, and software your team can own.</blockquote>
+        <div className="principles reveal"><span>No hidden handoffs</span><span>Weekly working releases</span><span>Clear documentation</span></div>
       </section>
 
       <section className="contact section-pad" id="contact">
         <div className="contact-orb" aria-hidden="true" />
         <div className="section-kicker light reveal"><span>05</span> Start something</div>
-        <div className="contact-content reveal">
-          <p>Have an idea worth building?</p>
-          <h2>Let's make it<br /><em>real.</em></h2>
-          <a className="contact-button" href="mailto:hello@logicforge.dev">hello@logicforge.dev <ArrowUpRight /></a>
+        <div className="contact-layout">
+          <div className="contact-content reveal">
+            <p>Have an idea worth building?</p>
+            <h2>Let's make it<br /><em>real.</em></h2>
+            <a className="contact-email" href={`mailto:${contact.email}`}><Mail size={17} /> {contact.email}</a>
+            <small>{contact.location}</small>
+          </div>
+          <form className="contact-form reveal" onSubmit={(event) => submitEnquiry(event, contact.email)} noValidate>
+            <div className="form-row">
+              <label>Name<input name="name" autoComplete="name" placeholder="Your name" aria-describedby="name-error" /></label>
+              <label>Work email<input name="email" type="email" autoComplete="email" placeholder="you@company.com" aria-describedby="email-error" /></label>
+            </div>
+            <div className="form-errors"><span id="name-error">{formErrors.name}</span><span id="email-error">{formErrors.email}</span></div>
+            <label>Company <span>(optional)</span><input name="company" autoComplete="organization" placeholder="Company name" /></label>
+            <label>What can we help with?
+              <select name="projectType" defaultValue="Product engineering">
+                <option>Product engineering</option><option>AI & automation</option><option>Digital transformation</option><option>Something else</option>
+              </select>
+            </label>
+            <label>Project details<textarea name="message" rows="4" placeholder="What are you building, and what would success look like?" aria-describedby="message-error" /></label>
+            <span className="field-error" id="message-error">{formErrors.message}</span>
+            <button type="submit">Prepare enquiry <ArrowUpRight size={18} /></button>
+            <p className="form-note">Submitting opens your email app. Your information is not stored by this website.</p>
+          </form>
         </div>
       </section>
 
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>LogicForge</a>
         <p>Strategy · Design · Engineering</p>
-        <div>{socialLinks.map((social) => <a href="#top" key={social}>{social}</a>)}</div>
-        <small>© {new Date().getFullYear()} LogicForge. All systems go.</small>
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <small>© {new Date().getFullYear()} LogicForge. All rights reserved.</small>
       </footer>
     </main>
   )
