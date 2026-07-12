@@ -44,7 +44,14 @@ function AINetwork() {
       const dark = document.documentElement.dataset.theme === 'dark'
       const nodeColor = dark ? '96, 165, 250' : '37, 99, 235'
 
-      particles.forEach((particle, index) => {
+      if (!reducedMotion && time && time - lastFrame < 32) {
+        frameId = requestAnimationFrame(draw)
+        return
+      }
+      lastFrame = time
+
+      for (let index = 0; index < particles.length; index += 1) {
+        const particle = particles[index]
         if (!reducedMotion) {
           particle.x += particle.vx
           particle.y += particle.vy
@@ -62,7 +69,8 @@ function AINetwork() {
           }
         }
 
-        particles.slice(index + 1).forEach((other) => {
+        for (let otherIndex = index + 1; otherIndex < particles.length; otherIndex += 1) {
+          const other = particles[otherIndex]
           const distance = Math.hypot(particle.x - other.x, particle.y - other.y)
           if (distance < CONNECTION_DISTANCE) {
             context.beginPath()
@@ -72,16 +80,15 @@ function AINetwork() {
             context.lineWidth = 0.7
             context.stroke()
           }
-        })
+        }
 
         const pulse = reducedMotion ? 1 : 0.75 + Math.sin(time * 0.002 + particle.phase) * 0.25
         context.beginPath()
         context.arc(particle.x, particle.y, particle.radius * pulse, 0, Math.PI * 2)
         context.fillStyle = `rgba(${nodeColor},${0.45 + pulse * 0.35})`
         context.fill()
-      })
+      }
 
-      if (!reducedMotion && time - lastFrame > 30) lastFrame = time
       if (!reducedMotion) frameId = requestAnimationFrame(draw)
     }
 
@@ -95,13 +102,14 @@ function AINetwork() {
 
     resize()
     draw()
-    window.addEventListener('resize', resize)
+    const resizeObserver = new ResizeObserver(resize)
+    resizeObserver.observe(canvas)
     canvas.addEventListener('pointermove', updatePointer)
     canvas.addEventListener('pointerleave', clearPointer)
 
     return () => {
       cancelAnimationFrame(frameId)
-      window.removeEventListener('resize', resize)
+      resizeObserver.disconnect()
       canvas.removeEventListener('pointermove', updatePointer)
       canvas.removeEventListener('pointerleave', clearPointer)
     }
