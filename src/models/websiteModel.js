@@ -31,9 +31,9 @@ export const websiteModel = {
     },
   ],
   engagements: [
-    { name: 'Build a website', type: 'For businesses and independent brands', detail: 'Design, development, SEO basics, deployment', image: '/images/engagement-launch.png', alt: 'Product team reviewing a newly designed business website in a bright studio' },
-    { name: 'Develop a backend', type: 'For apps and digital products', detail: 'REST API, database, authentication, integrations', image: '/images/engagement-modernise.png', alt: 'Backend engineer reviewing a modern API and system architecture across multiple screens' },
-    { name: 'Improve & support', type: 'For existing websites and applications', detail: 'Bug fixes, new features, speed, maintenance', image: '/images/engagement-automate.png', alt: 'Technical professional monitoring and supporting connected business systems' },
+    { name: 'Build a website', type: 'For businesses and independent brands', detail: 'Design, development, SEO basics, deployment', image: '/images/engagement-launch.png', width: 1774, height: 887, alt: 'Product team reviewing a newly designed business website in a bright studio' },
+    { name: 'Develop a backend', type: 'For apps and digital products', detail: 'REST API, database, authentication, integrations', image: '/images/engagement-modernise.png', width: 1672, height: 941, alt: 'Backend engineer reviewing a modern API and system architecture across multiple screens' },
+    { name: 'Improve & support', type: 'For existing websites and applications', detail: 'Bug fixes, new features, speed, maintenance', image: '/images/engagement-automate.png', width: 1662, height: 946, alt: 'Technical professional monitoring and supporting connected business systems' },
   ],
   capabilities: [
     { value: 'PHP 8', label: 'Laravel, Lumen, Core PHP, and MVC' },
