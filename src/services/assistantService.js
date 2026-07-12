@@ -11,7 +11,7 @@ export async function getAssistantReply(messages, signal) {
 }
 
 export const assistantSuggestions = [
-  'What services do you offer?',
-  'How can AI help my business?',
-  'What technology do you use?',
+  'Can you build my business website?',
+  'Can you develop a REST API?',
+  'Do you support existing projects?',
 ]
