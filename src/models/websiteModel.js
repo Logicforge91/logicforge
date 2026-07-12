@@ -41,6 +41,24 @@ export const websiteModel = {
     { number: '03', title: 'Build', text: 'We design and engineer in tight loops.' },
     { number: '04', title: 'Scale', text: 'We launch, learn, and keep improving.' },
   ],
+  faqs: [
+    {
+      question: 'What kinds of projects does LogicForge take on?',
+      answer: 'We focus on web platforms, customer portals, internal business systems, AI-enabled workflows, and modernisation of existing software.',
+    },
+    {
+      question: 'Can you work with our existing product team?',
+      answer: 'Yes. We can own a defined delivery stream or work alongside your design, engineering, and operations teams with shared planning and documentation.',
+    },
+    {
+      question: 'How does a typical engagement begin?',
+      answer: 'We start with a short discovery call, review the business problem and current systems, then propose a practical scope, delivery plan, and milestones.',
+    },
+    {
+      question: 'Do you provide support after launch?',
+      answer: 'Yes. Ongoing support can include monitoring, maintenance, security updates, performance improvements, and a planned product roadmap.',
+    },
+  ],
   contact: {
     email: 'hello@logicforge.example',
     phone: '+91 90000 00000',
