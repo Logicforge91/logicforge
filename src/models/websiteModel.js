@@ -25,9 +25,9 @@ export const websiteModel = {
     },
   ],
   engagements: [
-    { name: 'Launch', type: 'For founders and new ventures', detail: 'MVP strategy, UX/UI, engineering, launch', color: 'violet', mark: 'L' },
-    { name: 'Modernise', type: 'For established product teams', detail: 'Architecture, redesign, cloud, performance', color: 'lime', mark: 'M' },
-    { name: 'Automate', type: 'For operations-heavy businesses', detail: 'AI workflows, integrations, internal tools', color: 'orange', mark: 'A' },
+    { name: 'Launch', type: 'For founders and new ventures', detail: 'MVP strategy, UX/UI, engineering, launch', image: '/images/engagement-launch.png', alt: 'Product team reviewing a newly designed web application in a bright studio' },
+    { name: 'Modernise', type: 'For established product teams', detail: 'Architecture, redesign, cloud, performance', image: '/images/engagement-modernise.png', alt: 'Software engineer reviewing a complex modern platform architecture across multiple screens' },
+    { name: 'Automate', type: 'For operations-heavy businesses', detail: 'AI workflows, integrations, internal tools', image: '/images/engagement-automate.png', alt: 'Operations professional monitoring automated business workflows and connected dashboards' },
   ],
   capabilities: [
     { value: 'Web', label: 'React and modern web platforms' },

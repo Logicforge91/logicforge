@@ -106,8 +106,9 @@ function WebsiteView() {
         <div className="project-grid">
           {engagements.map((engagement, index) => (
             <article className={`project reveal project-${index + 1}`} key={engagement.name}>
-              <div className={`project-visual ${engagement.color}`}>
-                <span className="project-mark">{engagement.mark}</span>
+              <div className="project-visual">
+                <img src={engagement.image} alt={engagement.alt} loading="lazy" decoding="async" />
+                <span className="project-shade" aria-hidden="true" />
                 <span className="project-index">0{index + 1} / 03</span>
                 <ArrowUpRight className="project-arrow" />
               </div>
