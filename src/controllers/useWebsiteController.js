@@ -3,9 +3,22 @@ import { useCallback, useEffect, useState } from 'react'
 export function useWebsiteController() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [formErrors, setFormErrors] = useState({})
+  const [activeSection, setActiveSection] = useState('top')
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [openFaq, setOpenFaq] = useState(0)
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('logicforge-theme')
+    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
 
   const toggleMenu = useCallback(() => setMenuOpen((open) => !open), [])
   const closeMenu = useCallback(() => setMenuOpen(false), [])
+  const toggleFaq = useCallback((index) => {
+    setOpenFaq((current) => current === index ? -1 : index)
+  }, [])
+  const scrollToTop = useCallback(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [])
+  const toggleTheme = useCallback(() => setTheme((current) => current === 'dark' ? 'light' : 'dark'), [])
 
   const submitEnquiry = useCallback((event, recipient) => {
     event.preventDefault()
@@ -46,5 +59,44 @@ export function useWebsiteController() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  return { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry }
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    document.documentElement.style.colorScheme = theme
+    localStorage.setItem('logicforge-theme', theme)
+  }, [theme])
+
+  useEffect(() => {
+    const handleKeyboard = (event) => {
+      if (event.key === 'Escape') closeMenu()
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        document.querySelector('#contact input')?.focus()
+        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    window.addEventListener('keydown', handleKeyboard)
+    return () => window.removeEventListener('keydown', handleKeyboard)
+  }, [closeMenu])
+
+  useEffect(() => {
+    const sections = [...document.querySelectorAll('section[id]')]
+    const sectionObserver = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)),
+      { rootMargin: '-35% 0px -55% 0px' },
+    )
+    sections.forEach((section) => sectionObserver.observe(section))
+
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(scrollable > 0 ? Math.min((window.scrollY / scrollable) * 100, 100) : 0)
+    }
+    updateProgress()
+    window.addEventListener('scroll', updateProgress, { passive: true })
+    return () => {
+      sectionObserver.disconnect()
+      window.removeEventListener('scroll', updateProgress)
+    }
+  }, [])
+
+  return { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop, theme, toggleTheme }
 }
