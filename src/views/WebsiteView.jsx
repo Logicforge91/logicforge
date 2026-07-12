@@ -1,17 +1,18 @@
-import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Mail, Menu, Moon, MoveRight, Sparkles, Sun, X, Zap } from 'lucide-react'
+import { ArrowDown, ArrowUp, ArrowUpRight, Braces, Check, ChevronDown, Code2, Headphones, Mail, Menu, Moon, MoveRight, Sparkles, Sun, X, Zap } from 'lucide-react'
 import { useWebsiteController } from '../controllers/useWebsiteController.js'
 import { websiteModel } from '../models/websiteModel.js'
 import AINetwork from './components/AINetwork.jsx'
 import LogicForgeAssistant from './components/LogicForgeAssistant.jsx'
 
-const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap }
+const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap, support: Headphones }
 
 function WebsiteView() {
   const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop, theme, toggleTheme } = useWebsiteController()
-  const { company, services, engagements, capabilities, process, faqs, contact } = websiteModel
+  const { company, services, engagements, capabilities, clientBenefits, process, faqs, contact } = websiteModel
 
   return (
     <main>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="scroll-progress" style={{ transform: `scaleX(${scrollProgress / 100})` }} aria-hidden="true" />
       <header className="nav-wrap">
         <a className="brand" href="#top" aria-label="LogicForge home">
@@ -22,7 +23,7 @@ function WebsiteView() {
           <a href="#services" className={activeSection === 'services' ? 'active' : ''} aria-current={activeSection === 'services' ? 'location' : undefined} onClick={closeMenu}>Services</a>
           <a href="#engagements" className={activeSection === 'engagements' ? 'active' : ''} aria-current={activeSection === 'engagements' ? 'location' : undefined} onClick={closeMenu}>How we help</a>
           <a href="#about" className={activeSection === 'about' ? 'active' : ''} aria-current={activeSection === 'about' ? 'location' : undefined} onClick={closeMenu}>About</a>
-          <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <ArrowUpRight size={16} /></a>
+          <a className="nav-cta" href="#contact" onClick={closeMenu}>Hire LogicForge <ArrowUpRight size={16} /></a>
         </nav>
         <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -32,7 +33,7 @@ function WebsiteView() {
         </button>
       </header>
 
-      <section className="hero" id="top">
+      <section className="hero" id="top" aria-labelledby="main-content">
         <AINetwork />
         <figure className="hero-media" aria-label="Concept visualization of an AI-enabled software platform">
           <img src="/images/logicforge-ai-platform.png" alt="Abstract AI data platform with connected information flowing through glass interface panels" fetchPriority="high" />
@@ -42,11 +43,11 @@ function WebsiteView() {
         <div className="orbit orbit-two" aria-hidden="true" />
         <div className="hero-content">
           <div className="eyebrow"><span /> {contact.availability}</div>
-          <h1>Software that moves your <em>business forward.</em></h1>
+          <h1 id="main-content">Websites and APIs built to <em>grow your business.</em></h1>
           <div className="hero-bottom">
-            <p>LogicForge designs and builds reliable web platforms, AI workflows, and internal systems for growing businesses.</p>
+            <p>Freelance React, website, REST API, and backend development—with ongoing support after your project goes live.</p>
             <div className="hero-actions">
-              <a className="primary-action" href="#contact">Discuss your project <ArrowUpRight size={18} /></a>
+              <a className="primary-action" href="#contact">Get a project estimate <ArrowUpRight size={18} /></a>
               <a className="secondary-action" href="#services">Explore services <ArrowDown size={17} /></a>
             </div>
           </div>
@@ -60,6 +61,15 @@ function WebsiteView() {
             <ul><li><Check size={14} /> Design system</li><li><Check size={14} /> API integration</li><li><span /> Production release</li></ul>
           </div>
         </div>
+      </section>
+
+      <section className="client-benefits" aria-label="Benefits of working with LogicForge">
+        {clientBenefits.map((benefit) => (
+          <article key={benefit.title}>
+            <Check size={17} aria-hidden="true" />
+            <div><strong>{benefit.title}</strong><p>{benefit.text}</p></div>
+          </article>
+        ))}
       </section>
 
       <section className="intro section-pad" id="about">
@@ -101,7 +111,7 @@ function WebsiteView() {
             <div className="section-kicker"><span>03</span> Ways to work together</div>
             <h2>Start where<br /><em>you are.</em></h2>
           </div>
-          <p>Choose a focused engagement or bring us a difficult product problem. We shape the right scope together before any build begins.</p>
+          <p>Hire LogicForge for a complete website, a reliable backend, or flexible freelance support for an existing project.</p>
         </div>
         <div className="project-grid">
           {engagements.map((engagement, index) => (
@@ -133,7 +143,7 @@ function WebsiteView() {
         <div className="process-main reveal">
           <div className="section-kicker light"><span>04</span> The process</div>
           <h2>Clear thinking.<br /><em>Sharp execution.</em></h2>
-          <p>Small senior teams. Direct communication. No black boxes.</p>
+          <p>Direct communication with the developer doing the work. Clear milestones, working releases, and no black boxes.</p>
         </div>
         <ol className="steps reveal">
           {process.map(({ number, title, text }) => (
@@ -181,17 +191,17 @@ function WebsiteView() {
           </div>
           <form className="contact-form reveal" onSubmit={(event) => submitEnquiry(event, contact.email)} noValidate>
             <div className="form-row">
-              <label>Name<input name="name" autoComplete="name" placeholder="Your name" aria-describedby="name-error" /></label>
-              <label>Work email<input name="email" type="email" autoComplete="email" placeholder="you@company.com" aria-describedby="email-error" /></label>
+              <label>Name<input name="name" autoComplete="name" placeholder="Your name" aria-describedby="name-error" aria-invalid={Boolean(formErrors.name)} /></label>
+              <label>Work email<input name="email" type="email" autoComplete="email" placeholder="you@company.com" aria-describedby="email-error" aria-invalid={Boolean(formErrors.email)} /></label>
             </div>
             <div className="form-errors"><span id="name-error">{formErrors.name}</span><span id="email-error">{formErrors.email}</span></div>
             <label>Company <span>(optional)</span><input name="company" autoComplete="organization" placeholder="Company name" /></label>
             <label>What can we help with?
-              <select name="projectType" defaultValue="Product engineering">
-                <option>Product engineering</option><option>AI & automation</option><option>Digital transformation</option><option>Something else</option>
+              <select name="projectType" defaultValue="Business website">
+                <option>Business website</option><option>React web application</option><option>REST API or backend</option><option>Support and maintenance</option><option>Something else</option>
               </select>
             </label>
-            <label>Project details<textarea name="message" rows="4" placeholder="What are you building, and what would success look like?" aria-describedby="message-error" /></label>
+            <label>Project details<textarea name="message" rows="4" placeholder="What are you building, and what would success look like?" aria-describedby="message-error" aria-invalid={Boolean(formErrors.message)} /></label>
             <span className="field-error" id="message-error">{formErrors.message}</span>
             <button type="submit">Prepare enquiry <ArrowUpRight size={18} /></button>
             <p className="form-note">Submitting opens your email app. Your information is not stored by this website.</p>
@@ -202,7 +212,7 @@ function WebsiteView() {
 
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>{company.name}</a>
-        <p>Strategy · Design · Engineering</p>
+        <p>Websites · REST APIs · Backend support</p>
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
         <small>© {new Date().getFullYear()} {company.name}. All rights reserved.</small>
       </footer>
