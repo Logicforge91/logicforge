@@ -11,7 +11,7 @@ export async function getAssistantReply(messages, signal) {
 }
 
 export const assistantSuggestions = [
-  'What services do you offer?',
-  'How can AI help my business?',
-  'What technology do you use?',
+  'Can you build a Laravel REST API?',
+  'Do you work with Java and Spring Boot?',
+  'Can you optimize a slow MySQL application?',
 ]
