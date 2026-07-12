@@ -8,7 +8,7 @@ const serviceIcons = { code: Code2, sparkles: Sparkles, zap: Zap, support: Headp
 
 function WebsiteView() {
   const { menuOpen, toggleMenu, closeMenu, formErrors, submitEnquiry, activeSection, scrollProgress, openFaq, toggleFaq, scrollToTop, theme, toggleTheme } = useWebsiteController()
-  const { company, services, engagements, capabilities, clientBenefits, process, faqs, contact } = websiteModel
+  const { company, services, engagements, capabilities, technologyStack, clientBenefits, process, faqs, contact } = websiteModel
 
   return (
     <main>
@@ -43,9 +43,9 @@ function WebsiteView() {
         <div className="orbit orbit-two" aria-hidden="true" />
         <div className="hero-content">
           <div className="eyebrow"><span /> {contact.availability}</div>
-          <h1 id="main-content">Websites and APIs built to <em>grow your business.</em></h1>
+          <h1 id="main-content">Backend systems built for <em>real business.</em></h1>
           <div className="hero-bottom">
-            <p>Freelance React, website, REST API, and backend development—with ongoing support after your project goes live.</p>
+            <p>Freelance PHP, Laravel, Java, Spring Boot, REST API, MySQL, and production support—with direct developer collaboration.</p>
             <div className="hero-actions">
               <a className="primary-action" href="#contact">Get a project estimate <ArrowUpRight size={18} /></a>
               <a className="secondary-action" href="#services">Explore services <ArrowDown size={17} /></a>
@@ -139,9 +139,25 @@ function WebsiteView() {
         ))}
       </section>
 
+      <section className="technology section-pad" id="technology">
+        <div className="technology-heading reveal">
+          <div className="section-kicker"><span>04</span> Technology stack</div>
+          <h2>Tools selected for<br /><em>reliable delivery.</em></h2>
+          <p>Backend technologies and engineering practices used to build, optimize, and support production systems.</p>
+        </div>
+        <div className="technology-grid reveal">
+          {technologyStack.map((group) => (
+            <article key={group.category}>
+              <h3>{group.category}</h3>
+              <div>{group.items.map((item) => <span key={item}>{item}</span>)}</div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="process section-pad">
         <div className="process-main reveal">
-          <div className="section-kicker light"><span>04</span> The process</div>
+          <div className="section-kicker light"><span>05</span> The process</div>
           <h2>Clear thinking.<br /><em>Sharp execution.</em></h2>
           <p>Direct communication with the developer doing the work. Clear milestones, working releases, and no black boxes.</p>
         </div>
@@ -160,7 +176,7 @@ function WebsiteView() {
 
       <section className="faq section-pad" id="faq">
         <div className="faq-heading reveal">
-          <div className="section-kicker"><span>05</span> Common questions</div>
+          <div className="section-kicker"><span>06</span> Common questions</div>
           <h2>Before we<br /><em>get started.</em></h2>
           <p>Useful answers about working with LogicForge.</p>
         </div>
@@ -181,7 +197,7 @@ function WebsiteView() {
 
       <section className="contact section-pad" id="contact">
         <div className="contact-orb" aria-hidden="true" />
-        <div className="section-kicker light reveal"><span>06</span> Start something</div>
+        <div className="section-kicker light reveal"><span>07</span> Start something</div>
         <div className="contact-layout">
           <div className="contact-content reveal">
             <p>Have an idea worth building?</p>
@@ -198,7 +214,7 @@ function WebsiteView() {
             <label>Company <span>(optional)</span><input name="company" autoComplete="organization" placeholder="Company name" /></label>
             <label>What can we help with?
               <select name="projectType" defaultValue="Business website">
-                <option>Business website</option><option>React web application</option><option>REST API or backend</option><option>Support and maintenance</option><option>Something else</option>
+                <option>Business website</option><option>Laravel or PHP application</option><option>Java or Spring Boot service</option><option>REST API or integration</option><option>Database optimization</option><option>Production support</option><option>Something else</option>
               </select>
             </label>
             <label>Project details<textarea name="message" rows="4" placeholder="What are you building, and what would success look like?" aria-describedby="message-error" aria-invalid={Boolean(formErrors.message)} /></label>
@@ -212,7 +228,7 @@ function WebsiteView() {
 
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-mark"><Braces size={20} /></span>{company.name}</a>
-        <p>Websites · REST APIs · Backend support</p>
+        <p>PHP · Laravel · Java · Spring · REST APIs</p>
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
         <small>© {new Date().getFullYear()} {company.name}. All rights reserved.</small>
       </footer>

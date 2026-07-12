@@ -2,31 +2,31 @@ export const websiteModel = {
   company: {
     name: 'LogicForge',
     tagline: 'Ideas, engineered.',
-    description: 'A freelance development studio building fast websites, React applications, REST APIs, and reliable backend systems for businesses worldwide.',
+    description: 'A freelance development studio building PHP, Laravel, Java, Spring Boot, JavaScript, REST API, and database-backed systems for businesses worldwide.',
   },
   services: [
     {
       number: '01',
-      title: 'Website development',
-      text: 'Responsive business websites and landing pages built for speed, accessibility, search visibility, and customer conversion.',
+      title: 'Web application development',
+      text: 'Business websites and custom applications using PHP 8, Laravel, Core PHP, JavaScript, SQL, and maintainable MVC architecture.',
       icon: 'code',
     },
     {
       number: '02',
-      title: 'React web applications',
-      text: 'Modern dashboards, portals, SaaS interfaces, and custom web applications with maintainable React architecture.',
+      title: 'Laravel & PHP backend',
+      text: 'Laravel, Lumen, and Core PHP backends with Eloquent ORM, authentication, authorization, JWT, and third-party integrations.',
       icon: 'sparkles',
     },
     {
       number: '03',
-      title: 'REST API & backend',
-      text: 'Secure APIs, authentication, databases, integrations, and backend services designed around real business workflows.',
+      title: 'Java & Spring services',
+      text: 'Java 17, Spring Boot, Spring MVC, Spring Security, Hibernate/JPA, microservices, and production-ready REST APIs.',
       icon: 'zap',
     },
     {
       number: '04',
       title: 'Support & maintenance',
-      text: 'Bug fixes, performance improvements, feature updates, deployment support, and dependable ongoing maintenance.',
+      text: 'Production troubleshooting, bug fixes, Redis caching, query tuning, indexing, N+1 optimization, feature updates, and maintenance.',
       icon: 'support',
     },
   ],
@@ -36,10 +36,17 @@ export const websiteModel = {
     { name: 'Improve & support', type: 'For existing websites and applications', detail: 'Bug fixes, new features, speed, maintenance', image: '/images/engagement-automate.png', alt: 'Technical professional monitoring and supporting connected business systems' },
   ],
   capabilities: [
-    { value: 'React', label: 'Responsive interfaces and web applications' },
-    { value: 'REST', label: 'Secure APIs and third-party integrations' },
-    { value: 'Node', label: 'Backend services and business logic' },
-    { value: 'Support', label: 'Maintenance, fixes, and improvements' },
+    { value: 'PHP 8', label: 'Laravel, Lumen, Core PHP, and MVC' },
+    { value: 'Java 17', label: 'Spring Boot, MVC, Security, and JPA' },
+    { value: 'REST', label: 'Secure APIs, JWT, JSON, and integrations' },
+    { value: 'SQL', label: 'MySQL design, indexing, and query tuning' },
+  ],
+  technologyStack: [
+    { category: 'Languages', items: ['PHP 8.x', 'Java 17', 'JavaScript', 'SQL'] },
+    { category: 'Frameworks', items: ['Laravel', 'Lumen', 'Core PHP', 'Spring Boot', 'Spring MVC', 'Spring Security'] },
+    { category: 'Backend engineering', items: ['REST APIs', 'API integration', 'JSON', 'MVC', 'OOP', 'Microservices', 'Authentication', 'Authorization', 'JWT'] },
+    { category: 'Data & performance', items: ['MySQL', 'Eloquent ORM', 'Hibernate / JPA', 'Redis', 'Schema design', 'Indexing', 'Query tuning', 'N+1 optimization'] },
+    { category: 'Tools & practices', items: ['Git', 'GitHub', 'GitLab', 'Composer', 'Maven', 'Postman', 'Jira', 'Agile / Scrum', 'SDLC', 'Code review', 'Production support'] },
   ],
   clientBenefits: [
     { title: 'Direct collaboration', text: 'Speak directly with the developer working on your project.' },
@@ -56,7 +63,7 @@ export const websiteModel = {
   faqs: [
     {
       question: 'What kinds of projects does LogicForge take on?',
-      answer: 'We build business websites, landing pages, React applications, REST APIs, backend systems, dashboards, and integrations. We also improve and maintain existing projects.',
+      answer: 'We build PHP and Java web applications, Laravel and Spring Boot services, REST APIs, database-backed systems, integrations, and business websites. We also improve and maintain existing production projects.',
     },
     {
       question: 'Can you work with our existing product team?',
